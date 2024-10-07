@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tapfrontend-dev-2c9d9-authRole",
+      "UnauthRoleArn": "arn:aws:iam::535234491009:role/amplify-tapfrontend-dev-2c9d9-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::535234491009:role/amplify-tapfrontend-dev-2c9d9-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-tapfrontend-dev-2c9d9-deployment",
+      "UnauthRoleName": "amplify-tapfrontend-dev-2c9d9-unauthRole",
+      "StackName": "amplify-tapfrontend-dev-2c9d9",
+      "StackId": "arn:aws:cloudformation:us-east-1:535234491009:stack/amplify-tapfrontend-dev-2c9d9/7d6ac430-8223-11ef-a142-0ea4c9222aa3",
+      "AmplifyAppId": "d2nkchaafh374c"
+    },
+    "categories": {
+      "auth": {
+        "tapfrontend038e3492": {
+          "userPoolId": "us-east-1_GrYqmkwT9",
+          "userPoolName": "TapAssessmentUserPool",
+          "webClientId": "rmivii78b9jq97qkujosieog6",
+          "nativeClientId": "rmivii78b9jq97qkujosieog6"
+        }
+      }
+    }
+  }
+}

@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import StartPage from "./pages/StartPage";
+import Matches from "./pages/Matches";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <StartPage />,
+  },
+  {
+    path: "/matches",
+    element: <Matches />,
+  },
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="w-100 h-screen overflow-auto align-middle justify-center bg-gradient-to-br from-blue-50 to-green-50">
+      <RouterProvider router={router} />
     </div>
   );
 }
