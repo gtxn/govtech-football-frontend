@@ -11,7 +11,7 @@ export default function MatchSubmission({
   handleSubmit: () => {};
 }) {
   return (
-    <div className="w-full flex flex-col gap-2 bg-white shadow-sm p-6 rounded-xl">
+    <div className="flex flex-col gap-4">
       <TextField
         fullWidth
         variant="outlined"

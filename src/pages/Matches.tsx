@@ -1,66 +1,54 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { TextField } from "@mui/material";
 
 import getTeamsFromSessionId from "../api/getTeamsFromSessionId";
-import TeamTable from "../components/Matches/TeamTable";
-import CommonButton from "../components/CommonButton";
-import {
-  formatTeamsForDisplay,
-  sortTeams,
-  updateTeamsBasedOnMatches,
-} from "../utils/teamSorting";
-import { Team } from "../utils/schema";
-import TeamView from "../components/Matches/TeamView";
-import MatchSubmission from "../components/Matches/MatchSubmission";
+import { formatTeamsForDisplay, sortTeams } from "../utils/teams";
+import { Match2Player, Team } from "../utils/schema";
+import TeamView from "../components/Matches/TeamViewSection";
 import Header from "../components/Header";
+import updateTeamsByMatchesApi from "../api/updateTeamsByMatches";
+import MatchInformationSection from "../components/Matches/MatchInformationSection";
+import { matchTextToData } from "../utils/matches";
 
 export default function Matches({}) {
   let [searchParams, setSearchParams] = useSearchParams();
   let [teams, setTeams] = useState([]);
   let [matchText, setMatchText] = useState("");
 
-  const handleSubmit = async () => {
-    let matchDataText = matchText.split("\n");
-
-    let updatedTeams: any = updateTeamsBasedOnMatches(teams, matchDataText);
-    setTeams(updatedTeams);
-  };
-
-  useEffect(() => {
-    // TODO: reinstate if have connection
+  const refetch = async () => {
     getTeamsFromSessionId(searchParams.get("session_id") || "").then((r) => {
-      console.log(r);
       if (r.data?.success && r.data?.data) {
         setTeams(r.data?.data);
       }
     });
+  };
 
-    // If have no connection
-    // let dummyTeams: any = [
-    //   {
-    //     team_name: "firstTeam",
-    //     date_registered: new Date().getTime(),
-    //     group_number: 2,
-    //   },
-    //   {
-    //     team_name: "secondTeam",
-    //     date_registered: new Date().getTime(),
-    //     group_number: 2,
-    //   },
-    //   {
-    //     team_name: "thirdTeam",
-    //     date_registered: new Date().getTime(),
-    //     group_number: 1,
-    //   },
-    //   {
-    //     team_name: "fourthTeam",
-    //     date_registered: new Date().getTime(),
-    //     group_number: 1,
-    //   },
-    // ];
+  const handleSubmitNewMatchData = async () => {
+    // Check if match text is valid by regex
+    if (!/^([^ \n]* [^ \n]* [0-9]+ [0-9]+\n?)*$/.test(matchText)) {
+      window.alert(`Error: Match data must be of the form 
+<Team A name> <Team B name> <Team A goals scored> <Team B goals scored>
+<Team B name> <Team C name> <Team B goals scored> <Team C goals scored>
+<Team C name> <Team D name> <Team C goals scored> <Team D goals scored>
+…`);
+      return;
+    }
 
-    // setTeams(dummyTeams);
+    // Submit new match data
+    let matchData = matchTextToData(matchText);
+    let r = await updateTeamsByMatchesApi(teams, matchData);
+
+    if (r && r?.data && r?.data?.success) {
+      await refetch();
+      setMatchText("");
+    }
+  };
+
+  useEffect(() => {
+    const fetch = async () => {
+      await refetch();
+    };
+    fetch();
   }, []);
 
   // Format teams into format that can be displayed in table
@@ -69,6 +57,7 @@ export default function Matches({}) {
     let teamgrp1 = teams.filter((team: Team) => team.group_number == 1);
     return formatTeamsForDisplay(sortTeams(teamgrp1));
   }, [teams]);
+
   let teamsGrp2ForTable = useMemo(() => {
     let teamgrp2 = teams.filter((team: Team) => team.group_number == 2);
     return formatTeamsForDisplay(sortTeams(teamgrp2));
@@ -83,18 +72,21 @@ export default function Matches({}) {
       <TeamView
         teamsGrp1ForTable={teamsGrp1ForTable}
         teamsGrp2ForTable={teamsGrp2ForTable}
+        refetch={refetch}
       />
 
-      <h3 className="text-3xl mb-3 mt-6">Match Results</h3>
-
-      {/* Submitting match results */}
-      <MatchSubmission
-        matchText={matchText}
-        setMatchText={setMatchText}
-        handleSubmit={handleSubmit}
-      />
-
-      {/* Showing match results */}
+      {/* Match information */}
+      <h3 className="text-3xl mb-3 mt-6">Match Information</h3>
+      <div className="w-full flex flex-col gap-2 bg-white shadow-sm p-6 rounded-xl">
+        <MatchInformationSection
+          teamsGrp1ForTable={teamsGrp1ForTable}
+          teamsGrp2ForTable={teamsGrp2ForTable}
+          matchText={matchText}
+          setMatchText={setMatchText}
+          handleSubmitNewMatches={handleSubmitNewMatchData}
+          refetch={refetch}
+        />
+      </div>
     </div>
   );
 }

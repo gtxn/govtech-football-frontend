@@ -38,9 +38,10 @@ export default function SessionSetup({}) {
 
     // Put into dynamodb
     let r = await newTeamsApi(teams);
-    console.log(r);
-    if (r.data.success && r.data.sessionId) {
-      return navigate(`/matches?session_id=${r.data.sessionId}`);
+    if (r?.data && r?.data?.success && r?.data?.sessionId) {
+      setIsLoading(false);
+      navigate(`/matches?session_id=${r.data.sessionId}`);
+      navigate(0);
     }
 
     setIsLoading(false);
