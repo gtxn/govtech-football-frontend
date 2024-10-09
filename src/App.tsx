@@ -3,6 +3,7 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import StartPage from "./pages/StartPage";
 import Matches from "./pages/CompetitionDisplay";
+import LogsDisplay from "./pages/LogsDisplay";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: "/matches",
     element: <Matches />,
+  },
+  {
+    path: "/logs",
+    element: <LogsDisplay />,
   },
 ]);
 

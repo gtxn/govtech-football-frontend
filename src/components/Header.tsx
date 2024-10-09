@@ -32,15 +32,31 @@ export default function Header({}) {
 
       <Typography variant="h5">Govtech Football Tournament</Typography>
 
-      <CommonButton
-        title={"Logout"}
-        variant="outlined"
-        color="gray"
-        onClick={async () => {
-          await signOut();
-          await navigate("/");
-        }}
-      />
+      <div className="flex flex-col gap-2">
+        <CommonButton
+          title={"View logs"}
+          variant="outlined"
+          color="info"
+          onClick={() => {
+            navigate("/logs");
+          }}
+          style={{
+            width: "100%",
+          }}
+        />
+        <CommonButton
+          title={"Logout"}
+          variant="outlined"
+          color="gray"
+          onClick={async () => {
+            await signOut();
+            await navigate("/");
+          }}
+          style={{
+            width: "100%",
+          }}
+        />
+      </div>
     </div>
   );
 }

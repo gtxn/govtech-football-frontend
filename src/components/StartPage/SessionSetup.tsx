@@ -8,7 +8,6 @@ import { useAlert } from "../../Alert";
 export default function SessionSetup({}) {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname);
 
   const [isLoading, setIsLoading] = useState(false);
   const [teamText, setTeamText] = useState("");

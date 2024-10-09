@@ -1,9 +1,12 @@
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SessionSetup from "../components/StartPage/SessionSetup";
 import ExistingSessions from "../components/StartPage/ExistingSessions";
 import Header from "../components/Header";
+import { Typography } from "@mui/material";
+import getLogs from "../api/getLogs";
+import LogsDisplay from "./LogsDisplay";
 
 export default function StartPage({}) {
   const [currentTab, setCurrentTab] = useState(0);
@@ -11,6 +14,7 @@ export default function StartPage({}) {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue);
   };
+
   return (
     <div className="">
       <Header />
@@ -24,6 +28,7 @@ export default function StartPage({}) {
           <Tab label="Start new session" />
           <Tab label="Open Existing Session" />
         </Tabs>
+
         {currentTab === 0 && <SessionSetup />}
         {currentTab === 1 && <ExistingSessions />}
       </div>
