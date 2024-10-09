@@ -5,6 +5,8 @@ Try the app hosted on S3 [here](http://govtech-football-app.s3-website-us-east-1
 
 Running locally: I would prefer not to expose my API url so I will zip the whole frontend repository and submit that as a file instead. After downloading the zip file, run `npm start`
 
+Create a new account and have fun :D
+
 ### Architecture
 #### Frontend
 Built in react, hosted on S3. 
@@ -20,6 +22,4 @@ Backend logic is implemented using apiGateway and lambda.
 
 Database is in dynamoDB for speed of programming.
 
-Logs are also kept in dynamoDB. 
-
-
+Logs are also kept in dynamoDB.
