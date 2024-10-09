@@ -48,7 +48,7 @@ export default function Matches({}) {
   }, [teams]);
 
   return (
-    <div className="px-10 py-5">
+    <div className="">
       {pageLoading ? (
         <>
           <CircularProgress size="large" />
@@ -58,23 +58,25 @@ export default function Matches({}) {
           <Header />
 
           {/* Current teams display */}
-          <h3 className="text-3xl mb-3 mt-2">Current Teams</h3>
-          <TeamView
-            teamsGrp1ForTable={teamsGrp1ForTable}
-            teamsGrp2ForTable={teamsGrp2ForTable}
-            refetch={refetch}
-          />
-
-          {/* Match information */}
-          <h3 className="text-3xl mb-3 mt-6">Match Information</h3>
-          <div className="w-full flex flex-col gap-2 bg-white shadow-sm p-6 rounded-xl">
-            <MatchInformationSection
+          <div className="mx-5 my-5 lg:mx-20">
+            <h3 className="text-3xl mb-3 mt-2">Current Teams</h3>
+            <TeamView
               teamsGrp1ForTable={teamsGrp1ForTable}
               teamsGrp2ForTable={teamsGrp2ForTable}
-              matchText={matchText}
-              setMatchText={setMatchText}
               refetch={refetch}
             />
+
+            {/* Match information */}
+            <h3 className="text-3xl mb-3 mt-6">Match Information</h3>
+            <div className="w-full flex flex-col gap-2 bg-white shadow-sm p-6 rounded-xl">
+              <MatchInformationSection
+                teamsGrp1ForTable={teamsGrp1ForTable}
+                teamsGrp2ForTable={teamsGrp2ForTable}
+                matchText={matchText}
+                setMatchText={setMatchText}
+                refetch={refetch}
+              />
+            </div>
           </div>
         </>
       )}

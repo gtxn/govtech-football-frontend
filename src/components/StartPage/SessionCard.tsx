@@ -8,7 +8,7 @@ export default function SessionCard({ session }: { session: any }) {
   const navigate = useNavigate();
 
   return (
-    <div className="mt-4 bg-white shadow-sm rounded-md p-5 m-2 flex flex-row justify-between items-center">
+    <div className="mt-4 bg-gray-50 shadow-sm rounded-md p-5 m-2 flex flex-row justify-between items-center">
       <div>
         <p className="text-lg font-semibold">{session.session_id}</p>
 

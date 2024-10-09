@@ -3,7 +3,7 @@ import { Team } from "../../../utils/schema";
 import CommonButton from "../../CommonButton";
 import TeamTable from "./TeamTable";
 import { ClearTeamsButton, EditTeamsButton } from "../Buttons";
-import SessionSetup from "../../StartPage/SessionSetupPage";
+import SessionSetup from "../../StartPage/SessionSetup";
 import ButtonBar from "./ButtonBar";
 import GroupTeamView from "./GroupTeamView";
 import NextStageTeamView from "./NextStageTeamView";

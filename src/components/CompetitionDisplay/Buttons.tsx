@@ -130,7 +130,7 @@ export const ClearTeamsButton = ({ refetch }: { refetch?: any }) => {
         clearFunction={clearTeams}
         header="Clear Teams"
         bodyText="This will clear all teams
-        from this session. You will NOT be able to retrieve the team's data
+        from this session. As a result, the current session will also be deleted. You will NOT be able to retrieve the team's data
         and this action is non-reversible"
       />
     </>
@@ -191,8 +191,10 @@ export const TeamViewButton = ({ team }: { team: Team }) => {
           textTransform: "none", // To prevent uppercase text
           padding: 0, // Removes button padding
           minWidth: "auto", // Ensures button width fits the text
-          color: "darkblue",
+          color: "#515151",
+          textDecoration: "underline",
           "&:hover": {
+            color: "gray",
             textDecoration: "underline",
             backgroundColor: "transparent",
           },

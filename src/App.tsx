@@ -17,7 +17,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div className="w-100 h-screen overflow-auto align-middle justify-center bg-gradient-to-br from-blue-50 to-green-50">
+    <div className="w-100 h-screen overflow-auto align-middle justify-center bg-gray-100">
       <RouterProvider router={router} />
     </div>
   );

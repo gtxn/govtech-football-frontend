@@ -2,11 +2,13 @@ import { Box, TextField } from "@mui/material";
 import newTeamsApi from "../../api/newTeams";
 import { useState } from "react";
 import CommonButton from "../CommonButton";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAlert } from "../../Alert";
 
 export default function SessionSetup({}) {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.pathname);
 
   const [isLoading, setIsLoading] = useState(false);
   const [teamText, setTeamText] = useState("");
@@ -73,8 +75,12 @@ export default function SessionSetup({}) {
         "success"
       );
       setIsLoading(false);
+
       navigate(`/matches?session_id=${r.data.sessionId}`);
-      navigate(0);
+      if (location.pathname === "/matches") {
+        // Force reload if currently at /matches
+        navigate(0);
+      }
     } else {
       showAlert(`Failed to create teams: ${r?.data?.data}`, "error");
     }

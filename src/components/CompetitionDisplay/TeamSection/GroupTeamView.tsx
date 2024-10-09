@@ -16,7 +16,7 @@ export default function GroupTeamView({
   const textColor = colorTheme === "blue" ? "text-blue-900" : "text-green-900";
   const highlightColor = colorTheme === "blue" ? "#c6e7f1" : "#c6f1c6";
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   return (
     <div className="md:w-1/2">
