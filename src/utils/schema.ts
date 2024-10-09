@@ -11,6 +11,9 @@ export interface Team {
   num_draws?: number;
   total_goals?: number;
   match_history?: Array<Match>;
+
+  // Not saved in database
+  rank?: number;
 }
 
 export interface Match {

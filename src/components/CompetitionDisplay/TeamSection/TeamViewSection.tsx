@@ -6,6 +6,7 @@ import { ClearTeamsButton, EditTeamsButton } from "../Buttons";
 import SessionSetup from "../../StartPage/SessionSetupPage";
 import ButtonBar from "./ButtonBar";
 import GroupTeamView from "./GroupTeamView";
+import NextStageTeamView from "./NextStageTeamView";
 
 export default function TeamView({
   teamsGrp1ForTable,
@@ -26,6 +27,18 @@ export default function TeamView({
             teamsGrp1ForTable={teamsGrp1ForTable}
             teamsGrp2ForTable={teamsGrp2ForTable}
             refetch={refetch}
+          />
+
+          {/* View teams going to next round */}
+          <NextStageTeamView
+            teamData={[
+              ...teamsGrp1ForTable.filter(
+                (team) => team?.rank && team?.rank <= 3
+              ),
+              ...teamsGrp2ForTable.filter(
+                (team) => team?.rank && team?.rank <= 3
+              ),
+            ]}
           />
 
           {/* View teams by group */}

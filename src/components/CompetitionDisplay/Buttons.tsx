@@ -3,10 +3,12 @@ import CommonButton from "../CommonButton";
 import EditTeamsModal from "./modals/EditTeamsModal";
 import { Team } from "../../utils/schema";
 import ClearModal from "./modals/ClearTeamsModal";
-import { Tooltip } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import clearTeamsBySession from "../../api/clearTeamsFromSession";
 import { useSearchParams } from "react-router-dom";
 import clearMatchesBySession from "../../api/clearMatchesFromSession";
+import { useAlert } from "../../Alert";
+import TeamInfoModal from "./modals/TeamInfoModal";
 
 export const EditTeamsButton = ({
   teams,
@@ -45,9 +47,62 @@ export const EditTeamsButton = ({
   );
 };
 
+export const EditMatchesButton = ({
+  setIsEditing,
+  isEditing,
+  resetMatches,
+  handleSubmit,
+}: {
+  setIsEditing: any;
+  isEditing: boolean;
+  resetMatches?: any;
+  handleSubmit?: any;
+}) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  return (
+    <>
+      {isEditing ? (
+        <div className="flex items-center gap-2">
+          <CommonButton
+            title="Cancel"
+            onClick={() => {
+              setIsEditing(false);
+              resetMatches();
+            }}
+            color="gray"
+            size="small"
+          />
+          <CommonButton
+            title="Save"
+            onClick={async () => {
+              setIsLoading(true);
+              await handleSubmit();
+              setIsLoading(false);
+            }}
+            color="primary"
+            size="small"
+            isLoading={isLoading}
+          />
+        </div>
+      ) : (
+        <CommonButton
+          title="Edit"
+          onClick={() => {
+            setIsEditing(true);
+          }}
+          size="small"
+        />
+      )}
+    </>
+  );
+};
+
 export const ClearTeamsButton = ({ refetch }: { refetch?: any }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const { showAlert } = useAlert();
 
   let clearTeams = async () => {
     let sessionId = searchParams.get("session_id") || "";
@@ -56,6 +111,9 @@ export const ClearTeamsButton = ({ refetch }: { refetch?: any }) => {
     // Refetch the teams of the current session
     if (r && r?.data?.success && refetch) {
       await refetch();
+      showAlert(`Successfullly cleared teams from ${sessionId}`, "success");
+    } else {
+      showAlert(`Failed to clear: ${r?.data?.data}`, "error");
     }
   };
   return (
@@ -83,6 +141,8 @@ export const ClearMatchesButton = ({ refetch }: { refetch?: any }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const { showAlert } = useAlert();
+
   let clearTeams = async () => {
     let sessionId = searchParams.get("session_id") || "";
     let r = await clearMatchesBySession(sessionId);
@@ -90,6 +150,12 @@ export const ClearMatchesButton = ({ refetch }: { refetch?: any }) => {
     // Refetch the teams of the current session
     if (r && r?.data?.success && refetch) {
       await refetch();
+      showAlert(
+        `Successfully cleared matches of teams in ${sessionId}`,
+        "success"
+      );
+    } else {
+      showAlert(`Failed to clear: ${r?.data?.data}`, "error");
     }
   };
   return (
@@ -113,53 +179,34 @@ export const ClearMatchesButton = ({ refetch }: { refetch?: any }) => {
   );
 };
 
-export const EditMatchesButton = ({
-  setIsEditing,
-  isEditing,
-  refetch,
-  handleSubmit,
-}: {
-  setIsEditing: any;
-  isEditing: boolean;
-  refetch?: any;
-  handleSubmit?: any;
-}) => {
-  const [isLoading, setIsLoading] = useState(false);
+export const TeamViewButton = ({ team }: { team: Team }) => {
+  const [open, setOpen] = useState(false);
 
   return (
     <>
-      {isEditing ? (
-        <div className="flex items-center gap-2">
-          <CommonButton
-            title="Cancel"
-            onClick={async () => {
-              setIsEditing(false);
-              await refetch();
-            }}
-            color="gray"
-            size="small"
-          />
-          <CommonButton
-            title="Save"
-            onClick={async () => {
-              setIsLoading(true);
-              await handleSubmit();
-              setIsLoading(false);
-            }}
-            color="primary"
-            size="small"
-            isLoading={isLoading}
-          />
-        </div>
-      ) : (
-        <CommonButton
-          title="Edit"
-          onClick={() => {
-            setIsEditing(true);
-          }}
-          size="small"
-        />
-      )}
+      <Button
+        variant="text"
+        color="primary"
+        sx={{
+          textTransform: "none", // To prevent uppercase text
+          padding: 0, // Removes button padding
+          minWidth: "auto", // Ensures button width fits the text
+          color: "darkblue",
+          "&:hover": {
+            textDecoration: "underline",
+            backgroundColor: "transparent",
+          },
+        }}
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        {team.team_name}
+      </Button>
+
+      <div className="w-screen">
+        <TeamInfoModal team={team} open={open} setOpen={setOpen} />
+      </div>
     </>
   );
 };

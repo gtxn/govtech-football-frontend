@@ -10,10 +10,10 @@ export default function ExistingSessions({}) {
   let fetchSessions = async () => {
     setIsLoading(true);
 
-    let resp = await getAllSessionsInfo();
+    let r = await getAllSessionsInfo();
 
-    if (resp && resp?.data && resp?.data?.success) {
-      setSessions(resp.data.data);
+    if (r && r?.data && r?.data?.success) {
+      setSessions(r.data.data);
     }
 
     setIsLoading(false);

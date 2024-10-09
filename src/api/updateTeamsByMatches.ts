@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../config";
-import { getSessionToken } from "../utils";
+import getSessionToken from "../utils/getSessionToken";
 import { Match2Player } from "../utils/schema";
 
 const apiUrl = config.API_ENDPOINT;

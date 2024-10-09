@@ -42,6 +42,7 @@ export default function MatchInformationSection({
               groupTeamData={teamsGrp1ForTable}
               groupNumber={"1"}
               refetch={refetch}
+              colorTheme="green"
             />
 
             {/* Group 2 */}
@@ -49,6 +50,7 @@ export default function MatchInformationSection({
               groupTeamData={teamsGrp2ForTable}
               groupNumber={"2"}
               refetch={refetch}
+              colorTheme="blue"
             />
           </div>
         </>

@@ -59,8 +59,22 @@ export default function MatchResultTable({
           <TableBody>
             {matches.map((match: any, index) => (
               <TableRow key={index}>
-                <TableCell>{match.team1_name}</TableCell>
-                <TableCell>{match.team2_name}</TableCell>
+                <TableCell
+                  sx={{
+                    textDecoration:
+                      match.team1_goals >= match.team2_goals ? "underline" : "",
+                  }}
+                >
+                  {match.team1_name}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    textDecoration:
+                      match.team2_goals >= match.team1_goals ? "underline" : "",
+                  }}
+                >
+                  {match.team2_name}
+                </TableCell>
 
                 {["team1_goals", "team2_goals"].map((attribute: string) => (
                   <TableCell>

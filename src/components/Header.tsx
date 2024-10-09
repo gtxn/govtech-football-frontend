@@ -9,7 +9,7 @@ export default function Header({}) {
   return (
     <div className="flex justify-between items-center mt-3 mb-10 z-10 h-100">
       <CommonButton
-        title="back to start page"
+        title="Home"
         onClick={() => {
           navigate("/");
         }}
@@ -24,11 +24,6 @@ export default function Header({}) {
           await signOut();
           await navigate("/");
         }}
-        style={
-          {
-            // position: "absolute",
-          }
-        }
       />
     </div>
   );

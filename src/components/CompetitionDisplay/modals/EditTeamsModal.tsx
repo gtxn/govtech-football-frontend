@@ -5,6 +5,7 @@ import TeamTable from "../TeamSection/TeamTable";
 import { Team } from "../../../utils/schema";
 import CommonButton from "../../CommonButton";
 import updateTeamsApi from "../../../api/updateTeams";
+import { useAlert } from "../../../Alert";
 
 export default function EditTeamsModal({
   open,
@@ -20,6 +21,8 @@ export default function EditTeamsModal({
   const [editedTeamsValue, setEditedTeamsValue] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { showAlert } = useAlert();
+
   let handleSubmit = async () => {
     setIsLoading(true);
 
@@ -28,10 +31,13 @@ export default function EditTeamsModal({
     // Refetch the teams of the current session
     if (r && r?.data?.success && refetch) {
       await refetch();
+      showAlert(`Successfully updated teams`, "success");
+      setOpen(false);
+    } else {
+      showAlert(`Failed to update teams: ${r?.data?.data || r?.data}`, "error");
     }
 
     setIsLoading(false);
-    setOpen(false);
   };
 
   return (
