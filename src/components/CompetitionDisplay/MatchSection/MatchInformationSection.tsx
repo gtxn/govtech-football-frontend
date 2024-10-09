@@ -1,23 +1,21 @@
-import { Team } from "../../utils/schema";
-import CommonButton from "../CommonButton";
+import { Team } from "../../../utils/schema";
+import CommonButton from "../../CommonButton";
 import MatchSubmission from "./MatchSubmission";
 import GroupMatchesDisplay from "./GroupMatchesDisplay";
 import { useMemo } from "react";
-import { ClearMatchesButton, ClearTeamsButton } from "./Buttons";
+import { ClearMatchesButton, ClearTeamsButton } from "../Buttons";
 
 export default function MatchInformationSection({
   teamsGrp1ForTable,
   teamsGrp2ForTable,
   matchText,
   setMatchText,
-  handleSubmitNewMatches,
   refetch,
 }: {
   teamsGrp1ForTable: Array<Team>;
   teamsGrp2ForTable: Array<Team>;
   matchText: string;
   setMatchText: any;
-  handleSubmitNewMatches: any;
   refetch?: any;
 }) {
   let isMatchesPresent = useMemo(() => {
@@ -59,7 +57,8 @@ export default function MatchInformationSection({
         <MatchSubmission
           matchText={matchText}
           setMatchText={setMatchText}
-          handleSubmit={handleSubmitNewMatches}
+          teams={[...teamsGrp1ForTable, ...teamsGrp2ForTable]}
+          refetch={refetch}
         />
       )}
     </>

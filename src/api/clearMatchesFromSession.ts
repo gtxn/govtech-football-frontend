@@ -4,13 +4,19 @@ import { getSessionToken } from "../utils";
 
 const apiUrl = config.API_ENDPOINT;
 
-const getTeamsFromSessionId = async (sessionId: string) => {
+const clearMatchesBySession = async (sessionId: string) => {
   let r = await axios
-    .get(`${apiUrl}/getTeamsBySession?session_id=${sessionId}`, {
-      headers: {
-        Authorization: await getSessionToken(),
+    .post(
+      `${apiUrl}/clearMatchesBySessionId`,
+      {
+        session_id: sessionId,
       },
-    })
+      {
+        headers: {
+          Authorization: await getSessionToken(),
+        },
+      }
+    )
     .then((r) => {
       return r;
     })
@@ -23,4 +29,4 @@ const getTeamsFromSessionId = async (sessionId: string) => {
   return r;
 };
 
-export default getTeamsFromSessionId;
+export default clearMatchesBySession;

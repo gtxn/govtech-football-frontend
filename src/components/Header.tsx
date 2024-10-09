@@ -7,14 +7,23 @@ import { useNavigate } from "react-router-dom";
 export default function Header({}) {
   const navigate = useNavigate();
   return (
-    <div className="w-100 flex justify-end mt-3 z-10 h-100">
+    <div className="flex justify-between items-center mt-3 mb-10 z-10 h-100">
+      <CommonButton
+        title="back to start page"
+        onClick={() => {
+          navigate("/");
+        }}
+        variant="outlined"
+      />
+
       <CommonButton
         title={"Logout"}
+        variant="outlined"
+        color="gray"
         onClick={async () => {
           await signOut();
           await navigate("/");
         }}
-        variant="contained"
         style={
           {
             // position: "absolute",

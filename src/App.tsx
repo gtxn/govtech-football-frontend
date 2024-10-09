@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import StartPage from "./pages/StartPage";
-import Matches from "./pages/Matches";
+import Matches from "./pages/CompetitionDisplay";
 
 const router = createBrowserRouter([
   {

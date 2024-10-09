@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextField } from "@mui/material";
-import { Match2Player, Team } from "../../utils/schema";
+import { Match2Player, Team } from "../../../utils/schema";
 
 export default function EditableMatchField({
   row,

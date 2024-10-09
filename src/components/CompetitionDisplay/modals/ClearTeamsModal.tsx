@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Box, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import TeamTable from "../TeamTable";
+import TeamTable from "../TeamSection/TeamTable";
 import { Team } from "../../../utils/schema";
 import CommonButton from "../../CommonButton";
 import updateTeamsApi from "../../../api/updateTeams";

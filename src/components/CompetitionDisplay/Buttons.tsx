@@ -6,6 +6,7 @@ import ClearModal from "./modals/ClearTeamsModal";
 import { Tooltip } from "@mui/material";
 import clearTeamsBySession from "../../api/clearTeamsFromSession";
 import { useSearchParams } from "react-router-dom";
+import clearMatchesBySession from "../../api/clearMatchesFromSession";
 
 export const EditTeamsButton = ({
   teams,
@@ -84,7 +85,7 @@ export const ClearMatchesButton = ({ refetch }: { refetch?: any }) => {
 
   let clearTeams = async () => {
     let sessionId = searchParams.get("session_id") || "";
-    let r = await clearTeamsBySession(sessionId);
+    let r = await clearMatchesBySession(sessionId);
 
     // Refetch the teams of the current session
     if (r && r?.data?.success && refetch) {

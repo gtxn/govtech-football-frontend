@@ -6,8 +6,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useEffect, useMemo, useState } from "react";
-import { Team } from "../../utils/schema";
-import EditableFieldTeams from "./modals/EditableFieldTeams";
+import { Team } from "../../../utils/schema";
+import EditableFieldTeams from "../modals/EditableFieldTeams";
 
 let attributeTableMapping: any = {
   team_name: "Team Name",
@@ -43,7 +43,9 @@ export default function TeamTable({
         (attribute: string) =>
           attribute !== "session_id" &&
           attribute !== "match_history" &&
-          attribute !== "team_id"
+          attribute !== "team_id" &&
+          attribute !== "created_at" &&
+          attribute !== "last_modified_at"
       );
     }
     return [];

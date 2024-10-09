@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@mui/material";
 
-import { Match2Player, Team } from "../../utils/schema";
+import { Match2Player, Team } from "../../../utils/schema";
 import EditableMatchField from "./EditableMatchField";
 
 export default function MatchResultTable({

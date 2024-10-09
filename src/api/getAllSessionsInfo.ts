@@ -4,9 +4,9 @@ import { getSessionToken } from "../utils";
 
 const apiUrl = config.API_ENDPOINT;
 
-const getTeamsFromSessionId = async (sessionId: string) => {
+const getAllSessionsInfo = async () => {
   let r = await axios
-    .get(`${apiUrl}/getTeamsBySession?session_id=${sessionId}`, {
+    .get(`${apiUrl}/getAllSessionInfo`, {
       headers: {
         Authorization: await getSessionToken(),
       },
@@ -23,4 +23,4 @@ const getTeamsFromSessionId = async (sessionId: string) => {
   return r;
 };
 
-export default getTeamsFromSessionId;
+export default getAllSessionsInfo;

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { EditMatchesButton } from "./Buttons";
+import { EditMatchesButton } from "../Buttons";
 import MatchResultTable from "./MatchResultTable";
-import { Team } from "../../utils/schema";
-import updateTeamsByMatchesApi from "../../api/updateTeamsByMatches";
-import { getMatches } from "../../utils/matches";
+import { Team } from "../../../utils/schema";
+import updateTeamsByMatchesApi from "../../../api/updateTeamsByMatches";
+import { getMatches } from "../../../utils/matches";
 
 export default function GroupMatchesDisplay({
   groupTeamData,
