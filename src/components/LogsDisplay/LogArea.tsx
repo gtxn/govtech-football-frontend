@@ -1,5 +1,5 @@
 import { CircularProgress } from "@mui/material";
-import { Log } from "../../../utils/schema";
+import { Log } from "../../utils/schema";
 import LogEntry from "./LogEntry";
 
 export default function LogArea({

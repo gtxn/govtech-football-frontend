@@ -2,8 +2,8 @@ import { Log } from "../utils/schema";
 import { useEffect, useState } from "react";
 import getLogs from "../api/getLogs";
 import Header from "../components/Header";
-import LogsHeader from "../components/CompetitionDisplay/LogsDisplay/LogsHeader";
-import LogArea from "../components/CompetitionDisplay/LogsDisplay/LogArea";
+import LogsHeader from "../components/LogsDisplay/LogsHeader";
+import LogArea from "../components/LogsDisplay/LogArea";
 
 export default function LogsDisplay({}: {}) {
   const [logs, setLogs] = useState([]);

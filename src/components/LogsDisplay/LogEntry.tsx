@@ -1,5 +1,5 @@
-import { convertUnixToSgTime } from "../../../utils/date";
-import { Log } from "../../../utils/schema";
+import { convertUnixToSgTime } from "../../utils/date";
+import { Log } from "../../utils/schema";
 
 export default function LogEntry({ log }: { log: Log }) {
   return (

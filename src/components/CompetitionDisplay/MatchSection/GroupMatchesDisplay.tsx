@@ -56,20 +56,22 @@ export default function GroupMatchesDisplay({
             <h4 className={`${textColor} text-lg font-semibold`}>
               Group {groupNumber}
             </h4>
+          </div>
+        }
+        body={
+          <div className="mt-5">
             <EditMatchesButton
               setIsEditing={setIsEditing}
               isEditing={isEditing}
               resetMatches={resetMatches}
               handleSubmit={handleSubmitEditMatches}
             />
+            <MatchResultTable
+              matches={matches}
+              setMatches={setMatches}
+              isEditing={isEditing}
+            />
           </div>
-        }
-        body={
-          <MatchResultTable
-            matches={matches}
-            setMatches={setMatches}
-            isEditing={isEditing}
-          />
         }
         colorTheme={colorTheme || "green"}
         defaultOpen={false}
