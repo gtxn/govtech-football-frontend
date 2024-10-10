@@ -5,6 +5,8 @@ Try the app hosted on S3 [here](http://govtech-football-app.s3-website-us-east-1
 
 Running locally: I would prefer not to expose my API url (prevent DDoS) so I will zip the whole frontend repository and submit that as a file instead. After downloading the zip file, run `npm install` then `npm start`
 
+<b>CAUTION: Do not run `npm deploy`, as that will deploy to the S3 hosted website</b>
+
 Create a new account and have fun :D
 
 ## Architecture
