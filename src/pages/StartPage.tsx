@@ -1,12 +1,9 @@
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SessionSetup from "../components/StartPage/SessionSetup";
 import ExistingSessions from "../components/StartPage/ExistingSessions";
 import Header from "../components/Header";
-import { Typography } from "@mui/material";
-import getLogs from "../api/getLogs";
-import LogsDisplay from "./LogsDisplay";
 
 export default function StartPage({}) {
   const [currentTab, setCurrentTab] = useState(0);

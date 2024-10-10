@@ -4,6 +4,7 @@ import { useState } from "react";
 import CommonButton from "../CommonButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAlert } from "../../Alert";
+import { getTeamInfoFromText } from "../../utils/teams";
 
 export default function SessionSetup({}) {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function SessionSetup({}) {
 
   const { showAlert } = useAlert();
 
-  const handleClick = async () => {
+  const handleClickNewTeams = async () => {
     setIsLoading(true);
     // Check team data valid
     if (
@@ -37,36 +38,25 @@ export default function SessionSetup({}) {
       return;
     }
 
+    // If team data is of valid form
     setError({
       isError: false,
       errorMsg: "",
     });
 
-    // Get team data
-    let teamsStr = teamText.trim().split("\n");
-    let teams = teamsStr.map((team: string) => {
-      let [teamName, dateReg, group] = team.trim().split(" ");
-      let [dateTmp, monthTmp] = dateReg.split("/");
+    // Get team data from text input
+    let teams;
+    try {
+      teams = getTeamInfoFromText(teamText);
+    } catch (e: any) {
+      setError({
+        isError: true,
+        errorMsg: e,
+      });
+      setIsLoading(false);
+    }
 
-      let date = parseInt(dateTmp);
-      let month = parseInt(monthTmp);
-      if (date > 31 || month > 12 || month < 1 || date < 1) {
-        setError({
-          isError: true,
-          errorMsg: `Error: Invalid date ${date}/${month} for team ${teamName}`,
-        });
-        setIsLoading(false);
-        return;
-      }
-
-      return {
-        team_name: teamName,
-        date_registered: new Date(`${month}/${date}/2024`).getTime(),
-        group_number: group,
-      };
-    });
-
-    // Put into dynamodb
+    // Put team data into dynamodb
     let r = await newTeamsApi(teams);
     if (r?.data && r?.data?.success && r?.data?.sessionId) {
       showAlert(
@@ -81,11 +71,15 @@ export default function SessionSetup({}) {
         navigate(0);
       }
     } else {
-      showAlert(`Failed to create teams: ${r?.data?.data}`, "error");
+      setError({
+        isError: true,
+        errorMsg: `Failed to create teams: ${r?.data?.data}`,
+      });
     }
 
     setIsLoading(false);
   };
+
   return (
     <div>
       <div className="flex flex-col border-red gap-4">
@@ -107,7 +101,7 @@ export default function SessionSetup({}) {
         />
 
         <CommonButton
-          onClick={handleClick}
+          onClick={handleClickNewTeams}
           variant="outlined"
           title="Start Matches"
           isLoading={isLoading}

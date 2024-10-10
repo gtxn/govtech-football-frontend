@@ -1,5 +1,27 @@
 import { Team } from "./schema";
 
+export const getTeamInfoFromText = (teamText: string) => {
+  let teamsStr = teamText.trim().split("\n");
+  let teamsInfo = teamsStr.map((team: string) => {
+    let [teamName, dateReg, group] = team.trim().split(" ");
+    let [dateTmp, monthTmp] = dateReg.split("/");
+
+    let date = parseInt(dateTmp);
+    let month = parseInt(monthTmp);
+    if (date > 31 || month > 12 || month < 1 || date < 1) {
+      throw Error(`Error: Invalid date ${date}/${month} for team ${teamName}`);
+    }
+
+    return {
+      team_name: teamName,
+      date_registered: new Date(`${month}/${date}/2024`).getTime(),
+      group_number: group,
+    };
+  });
+
+  return teamsInfo;
+};
+
 export const formatTeamsForDisplay = (teams: Array<Team>) => {
   return teams.map((team: any) => {
     const { date_registered, ...teamWithoutDate } = team;

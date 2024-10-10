@@ -5,6 +5,7 @@ import { Team } from "../../../utils/schema";
 import updateTeamsByMatchesApi from "../../../api/updateTeamsByMatches";
 import { getMatches } from "../../../utils/matches";
 import { useAlert } from "../../../Alert";
+import Expandable from "../../Expandable";
 
 export default function GroupMatchesDisplay({
   groupTeamData,
@@ -49,21 +50,29 @@ export default function GroupMatchesDisplay({
 
   return (
     <div className={`${background} p-6 rounded-lg shadow-sm"`}>
-      <div className="flex flex-row gap-4 items-center">
-        <h4 className={`${textColor} text-lg font-semibold`}>
-          Group {groupNumber}
-        </h4>
-        <EditMatchesButton
-          setIsEditing={setIsEditing}
-          isEditing={isEditing}
-          resetMatches={resetMatches}
-          handleSubmit={handleSubmitEditMatches}
-        />
-      </div>
-      <MatchResultTable
-        matches={matches}
-        setMatches={setMatches}
-        isEditing={isEditing}
+      <Expandable
+        header={
+          <div className="flex gap-4">
+            <h4 className={`${textColor} text-lg font-semibold`}>
+              Group {groupNumber}
+            </h4>
+            <EditMatchesButton
+              setIsEditing={setIsEditing}
+              isEditing={isEditing}
+              resetMatches={resetMatches}
+              handleSubmit={handleSubmitEditMatches}
+            />
+          </div>
+        }
+        body={
+          <MatchResultTable
+            matches={matches}
+            setMatches={setMatches}
+            isEditing={isEditing}
+          />
+        }
+        colorTheme={colorTheme || "green"}
+        defaultOpen={false}
       />
     </div>
   );

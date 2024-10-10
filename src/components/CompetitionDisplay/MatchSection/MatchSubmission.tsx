@@ -52,11 +52,13 @@ export default function MatchSubmission({
     if (r && r?.data && r?.data?.success) {
       await refetch();
       showAlert(`Successfully updated match data`, "success");
+      setMatchText("");
     } else {
-      showAlert(`Failed to update matches: ${r?.data?.data}`, "error");
+      setError({
+        isError: true,
+        errorMsg: `Failed to update matches: ${r?.data?.data}`,
+      });
     }
-
-    setMatchText("");
     setIsLoading(false);
   };
 

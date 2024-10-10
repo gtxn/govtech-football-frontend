@@ -7,6 +7,7 @@ export default function ExistingSessions({}) {
   let [sessions, setSessions] = useState([]);
   let [isLoading, setIsLoading] = useState(false);
 
+  // Get all available sessions
   let fetchSessions = async () => {
     setIsLoading(true);
 

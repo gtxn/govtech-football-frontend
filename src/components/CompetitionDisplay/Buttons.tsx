@@ -19,7 +19,7 @@ export const EditTeamsButton = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Can only edit if rank hasn't been decided
+  // Can only edit team information if rank hasn't been decided
   const isEditable = useMemo(() => {
     let t: any = teams;
     if (t && t[0] && t[0].rank) {

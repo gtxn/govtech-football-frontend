@@ -7,10 +7,11 @@ import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 
 import { AlertProvider } from "./Alert";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import config from "./config";
+import "./index.css";
+import { Typography } from "@mui/material";
 
 Amplify.configure({
   Auth: {
@@ -21,15 +22,27 @@ Amplify.configure({
   },
 });
 
+const components = {
+  Header() {
+    return (
+      <div className="w-100 flex justify-center items-center py-5">
+        <h3 className="text-2xl">Govtech Football Tournament ⚽</h3>
+      </div>
+    );
+  },
+};
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <AlertProvider>
-      <Authenticator>
-        <App />
-      </Authenticator>
+      <div className="w-screen h-screen flex items-center justify-center bg-gray-100">
+        <Authenticator components={components}>
+          <App />
+        </Authenticator>
+      </div>
     </AlertProvider>
   </React.StrictMode>
 );

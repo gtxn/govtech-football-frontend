@@ -17,6 +17,7 @@ export default function Matches({}) {
   let [matchText, setMatchText] = useState("");
   let [pageLoading, setPageLoading] = useState(false);
 
+  // Refetch team information for a specific session
   const refetch = async () => {
     setPageLoading(true);
 
@@ -36,7 +37,7 @@ export default function Matches({}) {
   }, []);
 
   // Format teams into format that can be displayed in table
-  // Also sort the teams based on requirements
+  // Also sort the teams based on sorting requirements
   let teamsGrp1ForTable = useMemo(() => {
     let teamgrp1 = teams.filter((team: Team) => team.group_number == 1);
     return formatTeamsForDisplay(sortTeams(teamgrp1));
